@@ -4,7 +4,7 @@ set -euo pipefail
 
 readonly protoc_out_dir='gen'
 readonly protoc_src_dir='proto'
-readonly protoc_include_dir='include'
+readonly protoc_include_dir='googleapis'
 
 readonly go_out_dir="${protoc_out_dir}/go"
 readonly openapiv2_out_dir="${protoc_out_dir}/openapiv2"

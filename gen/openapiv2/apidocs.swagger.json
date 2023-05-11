@@ -71,6 +71,7 @@
         "parameters": [
           {
             "name": "body",
+            "description": "The request for ExampleApi.CreateMessage.\n\nmessage.id is asigned by either the client or the server.\nif the client does not specify, the server will generate one and asign it\nto this message.",
             "in": "body",
             "required": true,
             "schema": {
@@ -146,6 +147,7 @@
         "parameters": [
           {
             "name": "body",
+            "description": "The request for ExampleApi.BatchGetMessage.",
             "in": "body",
             "required": true,
             "schema": {
@@ -206,7 +208,8 @@
         },
         "exampleField": {
           "type": "string",
-          "description": "The string type example field of the message."
+          "format": "byte",
+          "description": "The hex encoding type example field of the message."
         }
       },
       "description": "An ExampleMessage for ExampleApi."
@@ -233,6 +236,7 @@
         "details": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
         }

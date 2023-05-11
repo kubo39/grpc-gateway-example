@@ -84,6 +84,6 @@ message ExampleMessage {
   // The id of the message.
   int64 id = 1;
 
-  // The string type example field of the message.
-  string example_field = 2;
+  // The hex encoding type example field of the message.
+  bytes example_field = 2;
 }

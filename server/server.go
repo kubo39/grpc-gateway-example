@@ -18,7 +18,7 @@ type ExampleAPIServer struct {
 func NewExampleAPIServer() (*ExampleAPIServer, error) {
 	msgs := make(map[int64]*example.ExampleMessage)
 	// use id=1 so that you can try out get method.
-	msgs[1] = &example.ExampleMessage{Id: 1, ExampleField: "example"}
+	msgs[1] = &example.ExampleMessage{Id: 1, ExampleField: []byte("example")}
 	return &ExampleAPIServer{msgs: msgs, nextID: 2}, nil
 }
 
