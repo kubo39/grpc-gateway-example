@@ -2,6 +2,8 @@ package server
 
 import (
 	"context"
+	"encoding/hex"
+	"fmt"
 
 	"github.com/sayshu-7s/grpc-gateway-example/gen/go/example"
 	"google.golang.org/grpc/codes"
@@ -18,7 +20,7 @@ type ExampleAPIServer struct {
 func NewExampleAPIServer() (*ExampleAPIServer, error) {
 	msgs := make(map[int64]*example.ExampleMessage)
 	// use id=1 so that you can try out get method.
-	msgs[1] = &example.ExampleMessage{Id: 1, ExampleField: []byte("example")}
+	msgs[1] = &example.ExampleMessage{Id: 1, ExampleField: []byte("ee0a0d14f90336be8485b9c018f7894507e574bc09f19bfc6c7f938ba98a2b1d")}
 	return &ExampleAPIServer{msgs: msgs, nextID: 2}, nil
 }
 
@@ -26,6 +28,13 @@ func (s ExampleAPIServer) GetMessage(ctx context.Context, r *example.GetMessageR
 	msg, ok := s.msgs[r.GetId()]
 	if !ok {
 		return nil, status.Error(codes.NotFound, codes.NotFound.String())
+	}
+	if r.GetId() == 1 {
+		encodedStr := hex.EncodeToString(msg.ExampleField)
+		fmt.Println(encodedStr)
+		if encodedStr != "ee0a0d14f90336be8485b9c018f7894507e574bc09f19bfc6c7f938ba98a2b1d" {
+			return nil, status.Error(codes.Internal, encodedStr)
+		}
 	}
 	return msg, nil
 }
